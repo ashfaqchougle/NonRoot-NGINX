@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    # This must match the labels we set on the pod!
+    matchLabels:
+      deploy: nginx
+  template:
+    metadata:
+      labels:
+        deploy: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: ashfaqchougle/nonroot-nginx:latest
+        #command: [ "/bin/bash", "-c", "nginx"]
+        command: [ "sh", "-c", "tail -f /dev/null"]
+        #args:
+        #  - tail -f /dev/null
+        #  - sleep 10s;
+        #    nginx;
+        ports:
+        - containerPort: 80  
+        securityContext:
+          runAsUser: 1000

@@ -18,12 +18,11 @@ spec:
       containers:
       - name: nginx
         image: ashfaqchougle/nonroot-nginx:latest
-        #command: [ "/bin/bash", "-c", "nginx"]
-        command: [ "sh", "-c", "tail -f /dev/null"]
-        #args:
-        #  - tail -f /dev/null
-        #  - sleep 10s;
-        #    nginx;
+        command: [ "sh", "-c"] #, "nginx", "tail -f /dev/null"]
+        #command: [ "sh", "-c", "tail -f /dev/null"]
+        args:
+          - nginx;
+            tail -f /dev/null;
         ports:
         - containerPort: 80  
         securityContext:
